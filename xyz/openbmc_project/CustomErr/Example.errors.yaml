@@ -1,0 +1,11 @@
+- name: ErrorOne
+  description: Error One happening
+
+- name: ErrorTwo
+  description: Error Two happening
+
+- name: ErrorThree
+  description: Error Three happening
+
+- name: ErrorFour
+  description: Error Four happening

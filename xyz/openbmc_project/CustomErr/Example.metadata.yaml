@@ -1,0 +1,21 @@
+- name: ErrorOne
+  level: ERR
+- name: ErrorTwo
+  level: ERR
+  meta:
+    - str: "COMMAND_NAME=%s"
+      type: string
+- name: ErrorThree
+  level: ERR
+  meta:
+    - str: "COMMAND_NAME=%s"
+      type: string
+  inherits:
+      - xyz.openbmc_project.Common.Callout.Device
+- name: ErrorFour
+  level: ERR
+  meta:
+    - str: "COMMAND_NAME=%s"
+      type: string
+  inherits:
+      - xyz.openbmc_project.Common.Callout.Inventory
