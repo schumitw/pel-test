@@ -3,7 +3,7 @@
 #include <CLI/CLI.hpp>
 #include <filesystem>
 #include <xyz/openbmc_project/Common/error.hpp>
-#include "xyz/openbmc_project/CustomErr/Example/error.hpp"
+#include <xyz/openbmc_project/CustomErr/Example/error.hpp>
 
 using namespace phosphor::logging;
 auto bus = sdbusplus::bus::new_default();
