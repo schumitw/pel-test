@@ -106,7 +106,7 @@ int main(int argc, char* argv[])
         using pelF = sdbusplus::xyz::openbmc_project::CustomErr::Example::Error::ErrorFour;
 		using namespace xyz::openbmc_project::CustomErr::Example;
 		report<pelF>(ErrorFour::COMMAND_NAME(argv[0]),
-                     ErrorFour::CALLOUT_INVENTORY_PATH("/xyz/openbmc_project/inventory/system/chassis/bmc"));
+                     ErrorFour::CALLOUT_INVENTORY_PATH("/xyz/openbmc_project/inventory/system/board/AST2600_EVB"));
     }
 
     if (deleteAllPELs)
