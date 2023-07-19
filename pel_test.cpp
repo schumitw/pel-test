@@ -8,6 +8,8 @@
 using namespace phosphor::logging;
 auto bus = sdbusplus::bus::new_default();
 bool displayPEL(std::string);
+void get_dbus();
+void set_dbus();
 
 int main(int argc, char* argv[])
 {
@@ -32,8 +34,10 @@ int main(int argc, char* argv[])
 
     CLI11_PARSE(app, argc, argv);
 
+	get_dbus();
     if (countPEL)
     {
+		set_dbus();
         std::vector <unsigned int> pelID;
 
         // PELs are stored in the /var/lib/phosphor-logging/errors/
@@ -172,4 +176,27 @@ bool displayPEL(std::string pelID)
 	std::cout<<std::endl;
 
 	return true;
+}
+
+void get_dbus()
+{
+	using Value = std::variant<int32_t>;
+	Value value;
+	auto sdbus = sdbusplus::bus::new_default();
+	auto sdmethod = sdbus.new_method_call("xyz.openbmc_project.hello_dbus", "/xyz/openbmc_project/hello_dbus/custom", "org.freedesktop.DBus.Properties", "Get");
+	sdmethod.append("xyz.openbmc_project.hello_dbus.custom.Example", "OemInt");
+	auto reply = sdbus.call(sdmethod);
+	reply.read(value);
+	auto oemInt = std::get<int32_t>(value);
+	std::cout<<"OemInt: "<<oemInt<<"\n";
+}
+
+void set_dbus()
+{
+	using Value = std::variant<int32_t>;
+	Value value = 111;
+	auto sdbus = sdbusplus::bus::new_default();
+	auto sdmethod = sdbus.new_method_call("xyz.openbmc_project.hello_dbus", "/xyz/openbmc_project/hello_dbus/custom", "org.freedesktop.DBus.Properties", "Set");
+	sdmethod.append("xyz.openbmc_project.hello_dbus.custom.Example", "OemInt", value);
+	auto reply = sdbus.call(sdmethod);
 }
